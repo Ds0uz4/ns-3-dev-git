@@ -317,6 +317,14 @@ class CsmaNetDevice : public NetDevice
     bool NeedsArp() const override;
 
     /**
+     * Set the callback used to notify the OpenFlow when a packet has been
+     * received by this device.
+     *
+     * \param cb The callback.
+     */
+    void SetOpenFlowReceiveCallback(NetDevice::PromiscReceiveCallback cb);
+
+    /**
      * Set the callback to be used to notify higher layers when a packet has been
      * received.
      *
@@ -680,6 +688,11 @@ class CsmaNetDevice : public NetDevice
      * The MAC address which has been assigned to this device.
      */
     Mac48Address m_address;
+
+    /**
+     * The OpenFlow receive callback.
+     */
+    NetDevice::PromiscReceiveCallback m_openFlowRxCallback;
 
     /**
      * The callback used to notify higher layers that a packet has been received.
